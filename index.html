@@ -1,221 +1,1786 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOXIC BY OHHO CRICKET</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<title>Streamly — Watch Anything</title>
+
+<style>
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #07080d;
+    --card: rgba(255,255,255,.055);
+    --card-hover: rgba(255,255,255,.085);
+    --border: rgba(255,255,255,.11);
+    --text: #ffffff;
+    --muted: #9298aa;
+    --muted2: #656b7c;
+
+    --accent: #7c5cff;
+    --accent2: #00d4ff;
+
+    --success: #36e59a;
+    --danger: #ff5d73;
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 15% 5%,
+            rgba(124,92,255,.22),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(0,212,255,.13),
+            transparent 28%
+        ),
+
+        var(--bg);
+
+    overflow-x: hidden;
+}
+
+/* Ambient glow */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 550px;
+    height: 550px;
+
+    left: 50%;
+    top: 42%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(124,92,255,.10);
+
+    filter: blur(130px);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container {
+    width: min(1100px, 92%);
+
+    margin: auto;
+
+    padding:
+        30px 0
+        70px;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 65px;
+}
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    letter-spacing: -.6px;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            var(--accent2)
+        );
+
+    box-shadow:
+        0 10px 35px
+        rgba(124,92,255,.35);
+}
+
+.logo-icon span {
+    font-size: 18px;
+
+    transform: translateX(1px);
+}
+
+.status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        8px 13px;
+
+    border-radius: 100px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow:
+        0 0 12px
+        rgba(54,229,154,.9);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    text-align: center;
+
+    max-width: 780px;
+
+    margin:
+        0 auto 36px;
+}
+
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding:
+        7px 13px;
+
+    margin-bottom: 19px;
+
+    border-radius: 100px;
+
+    background:
+        rgba(124,92,255,.09);
+
+    border:
+        1px solid
+        rgba(124,92,255,.25);
+
+    color: #b7aaff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .3px;
+}
+
+h1 {
+    font-size:
+        clamp(42px, 7vw, 74px);
+
+    line-height: .98;
+
+    letter-spacing: -4px;
+
+    margin-bottom: 22px;
+}
+
+.gradient-text {
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #aa98ff,
+            #62e8ff
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+/* =========================================================
+   INPUT AREA
+========================================================= */
+
+.input-card {
+    max-width: 860px;
+
+    margin:
+        0 auto 14px;
+
+    padding: 9px;
+
+    border-radius: 21px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.055);
+
+    backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 20px 70px
+        rgba(0,0,0,.30);
+
+    transition: .25s ease;
+}
+
+.input-card:focus-within {
+    border-color:
+        rgba(124,92,255,.55);
+
+    box-shadow:
+        0 20px 80px
+        rgba(124,92,255,.12);
+}
+
+.input-row {
+    display: flex;
+
+    gap: 9px;
+}
+
+.url-input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 56px;
+
+    padding:
+        0 17px;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 14px;
+
+    background:
+        rgba(0,0,0,.25);
+
+    color: white;
+
+    font-size: 14px;
+}
+
+.url-input::placeholder {
+    color: var(--muted2);
+}
+
+.play-btn {
+    height: 56px;
+
+    padding:
+        0 25px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    color: white;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            #5b8cff
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(124,92,255,.30);
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+}
+
+.play-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px
+        rgba(124,92,255,.40);
+}
+
+.play-btn:active {
+    transform: scale(.97);
+}
+
+/* Paste */
+
+.paste-row {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 12px;
+}
+
+.paste-btn {
+    border: none;
+
+    background: transparent;
+
+    color: var(--muted2);
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.paste-btn:hover {
+    color: white;
+}
+
+.hint {
+    text-align: center;
+
+    color: #666c7c;
+
+    font-size: 11px;
+
+    margin-top: 10px;
+}
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player-wrap {
+    display: none;
+
+    max-width: 1000px;
+
+    margin:
+        35px auto 0;
+
+    padding: 8px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.50);
+
+    animation:
+        playerAppear .45s ease;
+}
+
+.player {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: #000;
+
+    position: relative;
+}
+
+.player video,
+.player iframe {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border: none;
+}
+
+.player video {
+    object-fit: contain;
+}
+
+/* =========================================================
+   PLAYER INFO
+========================================================= */
+
+.video-info {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        16px 9px 8px;
+}
+
+.video-title {
+    min-width: 0;
+}
+
+.video-title strong {
+    display: block;
+
+    max-width: 600px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+}
+
+.video-title small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   PLAYER BUTTONS
+========================================================= */
+
+.player-actions {
+    display: flex;
+
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 12px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition:
+        background .2s,
+        transform .2s,
+        border-color .2s;
+}
+
+.icon-btn:hover {
+    background:
+        rgba(255,255,255,.10);
+
+    border-color:
+        rgba(255,255,255,.20);
+
+    transform: translateY(-1px);
+}
+
+.icon-btn:active {
+    transform: scale(.94);
+}
+
+/* PiP button */
+
+.pip-btn {
+    position: relative;
+}
+
+.pip-btn::after {
+    content: "PiP";
+
+    position: absolute;
+
+    right: -4px;
+    top: -7px;
+
+    padding:
+        2px 4px;
+
+    border-radius: 4px;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    background:
+        var(--accent);
+
+    color: white;
+
+    opacity: 0;
+
+    transform: translateY(3px);
+
+    transition: .2s;
+
+    pointer-events: none;
+}
+
+.pip-btn:hover::after {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty {
+    max-width: 850px;
+
+    margin:
+        55px auto 0;
+
+    text-align: center;
+
+    color: #777d8c;
+}
+
+.empty-icon {
+    width: 66px;
+    height: 66px;
+
+    display: grid;
+
+    place-items: center;
+
+    margin:
+        0 auto 15px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid var(--border);
+
+    font-size: 25px;
+}
+
+.empty strong {
+    display: block;
+
+    color: #c5c8d1;
+
+    margin-bottom: 6px;
+
+    font-size: 14px;
+}
+
+.empty p {
+    font-size: 12px;
+}
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+.error {
+    display: none;
+
+    max-width: 850px;
+
+    margin:
+        15px auto 0;
+
+    padding:
+        12px 15px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,93,115,.08);
+
+    border:
+        1px solid
+        rgba(255,93,115,.20);
+
+    color:
+        #ff9baa;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    text-align: center;
+
+    color: #555b6a;
+
+    font-size: 11px;
+
+    margin-top: 55px;
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes playerAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px)
+            scale(.985);
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #050505;
-      color: white;
-      min-height: 100vh;
-    }
+    to {
+        opacity: 1;
 
-    /* Telegram Popup */
-    .popup {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.88);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      padding: 20px;
+        transform:
+            translateY(0)
+            scale(1);
     }
+}
 
-    .popup-box {
-      width: 100%;
-      max-width: 420px;
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 18px;
-      padding: 30px 22px;
-      text-align: center;
-      box-shadow: 0 0 35px rgba(0,0,0,0.8);
-    }
+/* =========================================================
+   MOBILE
+========================================================= */
 
-    .popup-box h1 {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .popup-box p {
-      color: #bbb;
-      margin-bottom: 25px;
-      line-height: 1.5;
-    }
-
-    .telegram-btn {
-      display: inline-block;
-      background: #229ED9;
-      color: white;
-      text-decoration: none;
-      padding: 14px 25px;
-      border-radius: 10px;
-      font-weight: bold;
-      margin: 5px;
-    }
-
-    .close-btn {
-      background: transparent;
-      border: 1px solid #444;
-      color: #aaa;
-      padding: 12px 24px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    /* Main Website */
-    header {
-      text-align: center;
-      padding: 35px 15px 20px;
-    }
-
-    header h1 {
-      font-size: clamp(28px, 7vw, 55px);
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    header p {
-      color: #999;
-      margin-top: 8px;
-    }
+@media (max-width: 650px) {
 
     .container {
-      width: 92%;
-      max-width: 1000px;
-      margin: 25px auto 60px;
+        width: 94%;
+
+        padding-top: 24px;
     }
 
-    .video-card {
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 18px;
-      padding: 15px;
-      overflow: hidden;
+    header {
+        margin-bottom: 45px;
     }
 
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      border-radius: 12px;
-      overflow: hidden;
+    .status {
+        display: none;
     }
 
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
+    h1 {
+        letter-spacing: -2.8px;
     }
 
-    .video-title {
-      padding: 18px 5px 5px;
-      font-size: 20px;
-      font-weight: bold;
+    .hero p {
+        font-size: 14px;
     }
 
-    footer {
-      text-align: center;
-      color: #666;
-      padding: 25px;
-      font-size: 14px;
+    .input-row {
+        flex-direction: column;
     }
-  </style>
+
+    .play-btn {
+        width: 100%;
+    }
+
+    .player-wrap {
+        padding: 5px;
+
+        border-radius: 17px;
+    }
+
+    .player {
+        border-radius: 13px;
+    }
+
+    .video-info {
+        align-items: flex-start;
+    }
+
+    .video-title strong {
+        max-width: 190px;
+    }
+
+    .player-actions {
+        flex-shrink: 0;
+    }
+
+    .icon-btn {
+        width: 37px;
+        height: 37px;
+    }
+}
+</style>
 </head>
+
 
 <body>
 
-  <!-- TELEGRAM JOIN POPUP -->
-  <div class="popup" id="telegramPopup">
-    <div class="popup-box">
-      <h1>📢 JOIN OUR TELEGRAM</h1>
+<div class="container">
 
-      <p>
-        Join <b>OHHO CRICKET</b> on Telegram for updates and new videos.
-      </p>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-      <a
-        class="telegram-btn"
-        href="https://t.me/OHHOCRICKET"
-        target="_blank"
-      >
-        JOIN TELEGRAM
-      </a>
+    <header>
 
-      <br>
+        <div class="logo">
 
-      <button class="close-btn" onclick="closePopup()">
-        Continue to Website
-      </button>
+            <div class="logo-icon">
+                <span>▶</span>
+            </div>
+
+            Streamly
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            Ready to stream
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+        <div class="badge">
+            ✦ VIDEO PLAYER
+        </div>
+
+
+        <h1>
+
+            Paste a link.<br>
+
+            <span class="gradient-text">
+                Start watching.
+            </span>
+
+        </h1>
+
+
+        <p>
+            Watch YouTube videos or direct video files
+            with a clean, beautiful player.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         URL INPUT
+    ====================================================== -->
+
+    <div class="input-card">
+
+        <div class="input-row">
+
+            <input
+                id="videoUrl"
+                class="url-input"
+                type="url"
+                placeholder="Paste YouTube or MP4 video link..."
+                autocomplete="off"
+                spellcheck="false"
+            >
+
+
+            <button
+                class="play-btn"
+                id="playButton"
+                onclick="loadVideo()"
+            >
+                ▶ &nbsp; Play
+            </button>
+
+        </div>
+
+
+        <div class="hint">
+            YouTube • YouTube Shorts • MP4 • WebM • OGG
+        </div>
+
+
+        <div class="paste-row">
+
+            <button
+                class="paste-btn"
+                onclick="pasteFromClipboard()"
+            >
+                📋 Paste from clipboard
+            </button>
+
+        </div>
+
     </div>
-  </div>
 
-  <!-- WEBSITE HEADER -->
-  <header>
-    <h1>TOXIC BY OHHO CRICKET</h1>
-    <p>Official Video Portal</p>
-  </header>
 
-  <!-- VIDEO -->
-  <main class="container">
-    <div class="video-card">
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
 
-      <div class="video-wrapper">
-        <video id="mainVideo" controls playsinline poster="">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
+    <div
+        id="errorBox"
+        class="error"
+    ></div>
 
-      <div class="video-title">
-        TOXIC BY OHHO CRICKET
-      </div>
+
+    <!-- =====================================================
+         VIDEO PLAYER
+    ====================================================== -->
+
+    <div
+        id="playerWrap"
+        class="player-wrap"
+    >
+
+        <div
+            id="player"
+            class="player"
+        ></div>
+
+
+        <div class="video-info">
+
+            <div class="video-title">
+
+                <strong
+                    id="videoName"
+                >
+                    Video
+                </strong>
+
+                <small
+                    id="videoStatus"
+                >
+                    Ready
+                </small>
+
+            </div>
+
+
+            <div class="player-actions">
+
+                <!-- Picture in Picture -->
+
+                <button
+                    id="pipButton"
+                    class="icon-btn pip-btn"
+                    onclick="togglePiP()"
+                    title="Picture in Picture"
+                >
+                    ▣
+                </button>
+
+
+                <!-- Fullscreen -->
+
+                <button
+                    class="icon-btn"
+                    onclick="openFullscreen()"
+                    title="Fullscreen"
+                >
+                    ⛶
+                </button>
+
+
+                <!-- New video -->
+
+                <button
+                    class="icon-btn"
+                    onclick="newVideo()"
+                    title="New video"
+                >
+                    ↻
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
-  </main>
-
-  <footer>
-    © 2026 TOXIC BY OHHO CRICKET
-  </footer>
 
 
-  <script>
+    <!-- =====================================================
+         EMPTY STATE
+    ====================================================== -->
 
-    /*
-      ==============================
-      PUT YOUR VIDEO LINK HERE
-      ==============================
+    <div
+        id="emptyState"
+        class="empty"
+    >
 
-      Example:
-      const VIDEO_URL = "https://filetolinkkk-77971a19d2f8.herokuapp.com/184938/TOXiC.2026.1080p.HDTC.Hindi-Line.HC-ESub.x264.mkv?hash=AgADxy";
+        <div class="empty-icon">
+            🎬
+        </div>
 
-      The link should point directly to a video file
-      such as .mp4 if you are using the HTML5 video player.
-    */
+        <strong>
+            Your video will appear here
+        </strong>
 
-    const VIDEO_URL = "https://filetolinkkk-77971a19d2f8.herokuapp.com/184938/TOXiC.2026.1080p.HDTC.Hindi-Line.HC-ESub.x264.mkv?hash=AgADxy";
+        <p>
+            Paste a YouTube or direct video URL above.
+        </p>
 
-    document.getElementById("mainVideo").src = VIDEO_URL;
+    </div>
 
 
-    // Telegram popup
-    function closePopup() {
-      document.getElementById("telegramPopup").style.display = "none";
+    <footer>
+        Streamly · Simple video streaming
+    </footer>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const input =
+    document.getElementById("videoUrl");
+
+const player =
+    document.getElementById("player");
+
+const playerWrap =
+    document.getElementById("playerWrap");
+
+const emptyState =
+    document.getElementById("emptyState");
+
+const videoName =
+    document.getElementById("videoName");
+
+const videoStatus =
+    document.getElementById("videoStatus");
+
+const pipButton =
+    document.getElementById("pipButton");
+
+const errorBox =
+    document.getElementById("errorBox");
+
+
+/* =========================================================
+   YOUTUBE ID DETECTION
+========================================================= */
+
+function getYouTubeID(url) {
+
+    try {
+
+        const parsed =
+            new URL(url);
+
+        const host =
+            parsed.hostname
+                .toLowerCase()
+                .replace("www.", "");
+
+
+        /* youtube.com/watch?v= */
+
+        if (
+            host === "youtube.com" &&
+            parsed.pathname === "/watch"
+        ) {
+
+            return parsed
+                .searchParams
+                .get("v");
+
+        }
+
+
+        /* youtu.be/VIDEO_ID */
+
+        if (
+            host === "youtu.be"
+        ) {
+
+            return parsed
+                .pathname
+                .substring(1)
+                .split("/")[0];
+
+        }
+
+
+        /* youtube.com/shorts/VIDEO_ID */
+
+        if (
+            host === "youtube.com" &&
+            parsed.pathname
+                .startsWith("/shorts/")
+        ) {
+
+            return parsed
+                .pathname
+                .split("/")[2];
+
+        }
+
+
+        /* youtube.com/embed/VIDEO_ID */
+
+        if (
+            host === "youtube.com" &&
+            parsed.pathname
+                .startsWith("/embed/")
+        ) {
+
+            return parsed
+                .pathname
+                .split("/")[2];
+
+        }
+
     }
 
-  </script>
+    catch {
+
+        return null;
+
+    }
+
+    return null;
+}
+
+
+/* =========================================================
+   LOAD VIDEO
+========================================================= */
+
+function loadVideo() {
+
+    clearError();
+
+    const url =
+        input.value.trim();
+
+
+    if (!url) {
+
+        showError(
+            "Please paste a YouTube or video URL first."
+        );
+
+        input.focus();
+
+        return;
+    }
+
+
+    const youtubeID =
+        getYouTubeID(url);
+
+
+    /* YouTube */
+
+    if (youtubeID) {
+
+        loadYouTube(youtubeID);
+
+        return;
+    }
+
+
+    /* Direct video */
+
+    loadDirectVideo(url);
+}
+
+
+/* =========================================================
+   LOAD YOUTUBE
+========================================================= */
+
+function loadYouTube(id) {
+
+    player.innerHTML = "";
+
+
+    const iframe =
+        document.createElement("iframe");
+
+
+    iframe.src =
+        "https://www.youtube.com/embed/" +
+        encodeURIComponent(id) +
+        "?rel=0" +
+        "&modestbranding=1" +
+        "&playsinline=1";
+
+
+    iframe.title =
+        "YouTube video player";
+
+
+    iframe.allow =
+        "accelerometer; autoplay; " +
+        "clipboard-write; encrypted-media; " +
+        "gyroscope; picture-in-picture; " +
+        "web-share";
+
+
+    iframe.allowFullscreen =
+        true;
+
+
+    player.appendChild(iframe);
+
+
+    videoName.textContent =
+        "YouTube Video";
+
+
+    videoStatus.textContent =
+        "YouTube";
+
+
+    /*
+     * Our native PiP button is disabled
+     * for YouTube because the video is inside
+     * a YouTube iframe.
+     */
+
+    pipButton.style.opacity =
+        ".45";
+
+    pipButton.title =
+        "PiP is controlled by YouTube/browser";
+
+
+    showPlayer();
+}
+
+
+/* =========================================================
+   LOAD DIRECT VIDEO
+========================================================= */
+
+function loadDirectVideo(url) {
+
+    player.innerHTML = "";
+
+
+    const video =
+        document.createElement("video");
+
+
+    video.controls =
+        true;
+
+    video.playsInline =
+        true;
+
+    video.preload =
+        "metadata";
+
+    video.crossOrigin =
+        "anonymous";
+
+    video.src =
+        url;
+
+
+    /*
+     * VIDEO EVENTS
+     */
+
+    video.addEventListener(
+        "loadedmetadata",
+        () => {
+
+            videoStatus.textContent =
+                "Ready to watch";
+
+        }
+    );
+
+
+    video.addEventListener(
+        "playing",
+        () => {
+
+            videoStatus.textContent =
+                "Playing";
+
+        }
+    );
+
+
+    video.addEventListener(
+        "pause",
+        () => {
+
+            videoStatus.textContent =
+                "Paused";
+
+        }
+    );
+
+
+    video.addEventListener(
+        "ended",
+        () => {
+
+            videoStatus.textContent =
+                "Finished";
+
+        }
+    );
+
+
+    video.addEventListener(
+        "error",
+        () => {
+
+            videoStatus.textContent =
+                "Unable to load";
+
+            showError(
+                "This video could not be loaded. " +
+                "Make sure the link is a direct MP4/WebM/OGG file " +
+                "and that the server allows browser playback."
+            );
+
+        }
+    );
+
+
+    player.appendChild(video);
+
+
+    /*
+     * FILE NAME
+     */
+
+    try {
+
+        const parsed =
+            new URL(url);
+
+        const filename =
+            decodeURIComponent(
+                parsed.pathname
+                    .split("/")
+                    .pop()
+            );
+
+
+        videoName.textContent =
+            filename || "Video";
+
+    }
+
+    catch {
+
+        videoName.textContent =
+            "Video";
+
+    }
+
+
+    /*
+     * Enable PiP
+     */
+
+    pipButton.style.opacity =
+        "1";
+
+    pipButton.title =
+        "Picture in Picture";
+
+
+    videoStatus.textContent =
+        "Loading...";
+
+
+    showPlayer();
+}
+
+
+/* =========================================================
+   SHOW PLAYER
+========================================================= */
+
+function showPlayer() {
+
+    playerWrap.style.display =
+        "block";
+
+    emptyState.style.display =
+        "none";
+
+
+    playerWrap.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+
+/* =========================================================
+   PICTURE IN PICTURE
+========================================================= */
+
+async function togglePiP() {
+
+    const video =
+        player.querySelector("video");
+
+
+    /*
+     * YouTube iframe
+     */
+
+    if (!video) {
+
+        showError(
+            "For YouTube, use the Picture-in-Picture option provided by your browser/YouTube player."
+        );
+
+        return;
+    }
+
+
+    /*
+     * Browser doesn't support PiP
+     */
+
+    if (
+        !document.pictureInPictureEnabled ||
+        video.disablePictureInPicture
+    ) {
+
+        showError(
+            "Picture-in-Picture is not supported by this browser."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        /*
+         * Exit PiP
+         */
+
+        if (
+            document.pictureInPictureElement
+        ) {
+
+            await document
+                .exitPictureInPicture();
+
+            return;
+        }
+
+
+        /*
+         * Enter PiP
+         */
+
+        await video.requestPictureInPicture();
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "PiP error:",
+            error
+        );
+
+        showError(
+            "Picture-in-Picture could not be started. Start the video first and try again."
+        );
+
+    }
+}
+
+
+/* =========================================================
+   PIP STATE
+========================================================= */
+
+document.addEventListener(
+    "enterpictureinpicture",
+    () => {
+
+        pipButton.textContent =
+            "◩";
+
+        pipButton.title =
+            "Exit Picture in Picture";
+
+    }
+);
+
+
+document.addEventListener(
+    "leavepictureinpicture",
+    () => {
+
+        pipButton.textContent =
+            "▣";
+
+        pipButton.title =
+            "Picture in Picture";
+
+    }
+);
+
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+function openFullscreen() {
+
+    const video =
+        player.querySelector("video");
+
+    const iframe =
+        player.querySelector("iframe");
+
+
+    /*
+     * Direct video
+     */
+
+    if (video) {
+
+        if (video.requestFullscreen) {
+
+            video.requestFullscreen();
+
+        }
+
+        else if (
+            video.webkitEnterFullscreen
+        ) {
+
+            video.webkitEnterFullscreen();
+
+        }
+
+        return;
+    }
+
+
+    /*
+     * YouTube
+     */
+
+    if (iframe) {
+
+        if (iframe.requestFullscreen) {
+
+            iframe.requestFullscreen();
+
+        }
+
+    }
+}
+
+
+/* =========================================================
+   NEW VIDEO
+========================================================= */
+
+function newVideo() {
+
+    /*
+     * Exit PiP first
+     */
+
+    if (
+        document.pictureInPictureElement
+    ) {
+
+        document
+            .exitPictureInPicture()
+            .catch(() => {});
+
+    }
+
+
+    player.innerHTML = "";
+
+    playerWrap.style.display =
+        "none";
+
+    emptyState.style.display =
+        "block";
+
+    input.value = "";
+
+    videoName.textContent =
+        "Video";
+
+    videoStatus.textContent =
+        "Ready";
+
+    clearError();
+
+    input.focus();
+}
+
+
+/* =========================================================
+   CLIPBOARD
+========================================================= */
+
+async function pasteFromClipboard() {
+
+    try {
+
+        const text =
+            await navigator
+                .clipboard
+                .readText();
+
+
+        if (!text) {
+
+            showError(
+                "Your clipboard is empty."
+            );
+
+            return;
+        }
+
+
+        input.value =
+            text.trim();
+
+
+        loadVideo();
+
+    }
+
+    catch {
+
+        showError(
+            "Clipboard access was blocked. Paste the link manually."
+        );
+
+    }
+}
+
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+input.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            loadVideo();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ERROR SYSTEM
+========================================================= */
+
+function showError(message) {
+
+    errorBox.textContent =
+        message;
+
+    errorBox.style.display =
+        "block";
+
+}
+
+
+function clearError() {
+
+    errorBox.textContent =
+        "";
+
+    errorBox.style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   AUTO-PASTE SUPPORT
+========================================================= */
+
+input.addEventListener(
+    "paste",
+    function() {
+
+        /*
+         * Let browser finish inserting
+         * clipboard text first.
+         */
+
+        setTimeout(() => {
+
+            const value =
+                input.value.trim();
+
+
+            /*
+             * Automatically play when
+             * a YouTube link is pasted.
+             */
+
+            if (
+                getYouTubeID(value)
+            ) {
+
+                loadVideo();
+
+            }
+
+        }, 100);
+
+    }
+);
+
+</script>
 
 </body>
 </html>
